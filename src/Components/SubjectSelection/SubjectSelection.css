@@ -1,0 +1,140 @@
+.selection-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.selection-content {
+  background: white;
+  border-radius: 17px;
+  padding: 34px;
+  max-width: 850px;
+  width: 100%;
+  box-shadow: 0 17px 51px rgba(0, 0, 0, 0.3);
+}
+
+.selection-content h1 {
+  text-align: center;
+  color: #333;
+  font-size: 2.55em;
+  margin-bottom: 8.5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 0.935em;
+  margin-bottom: 25.5px;
+}
+
+.difficulty-selector {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.difficulty-selector label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.difficulty-btn {
+  padding: 10px 25px;
+  border: 2px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.difficulty-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+.difficulty-btn.active {
+  background: #667eea;
+  color: white;
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(127.5px, 1fr));
+  gap: 17px;
+  margin-bottom: 34px;
+}
+
+.subject-card {
+  background: #f5f5f5;
+  border: 1.7px solid transparent;
+  border-radius: 12.75px;
+  padding: 21.25px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-5px);
+  border-color: #667eea;
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+}
+
+.subject-card.selected {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.subject-icon {
+  font-size: 2.5em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.subject-card h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: inherit;
+}
+
+.start-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-button.enabled {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.start-button.enabled:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.start-button.disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
