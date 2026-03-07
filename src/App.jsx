@@ -13,6 +13,7 @@ const App = () => {
   const [quizResults, setQuizResults] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [apiTestResult, setApiTestResult] = useState(null)
 
   const handleSelectSubject = async (selectionData) => {
     setSelectedSubject(selectionData.subject.name)
@@ -21,24 +22,14 @@ const App = () => {
     setError(null)
     
     try {
-      // Try to use AI API, fallback to mock data
-      let generatedQuestions
-      try {
-        setLoading(true)
-        generatedQuestions = await generateQuizQuestions(
-          selectionData.subject.name,
-          selectionData.difficulty,
-          5
-        )
-      } catch (apiError) {
-        console.warn('AI API failed, using mock questions:', apiError.message)
-        // Fallback to mock questions for testing
-        generatedQuestions = generateMockQuestions(
-          selectionData.subject.name,
-          selectionData.difficulty
-        )
-      }
-      
+      // Always attempt API call; on failure surface error so user can retry
+      setLoading(true)
+      const generatedQuestions = await generateQuizQuestions(
+        selectionData.subject.name,
+        selectionData.difficulty,
+        5
+      )
+
       setQuestions(generatedQuestions)
       setAppState('quiz')
     } catch (err) {
@@ -46,6 +37,22 @@ const App = () => {
       setAppState('selection')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleUseMock = () => {
+    const mocked = generateMockQuestions(selectedSubject || 'Data Structures', selectedDifficulty || 'easy', 5)
+    setQuestions(mocked)
+    setAppState('quiz')
+  }
+
+  const testApi = async () => {
+    setApiTestResult('Testing...')
+    try {
+      const res = await generateQuizQuestions('Data Structures', 'easy', 1)
+      setApiTestResult(`Success: received ${res.length} question`)
+    } catch (e) {
+      setApiTestResult(`Error: ${e.message}`)
     }
   }
 
@@ -71,8 +78,12 @@ const App = () => {
     <div className="app">
       {error && (
         <div className="error-banner">
-          {error}
-          <button onClick={handleSelectNewSubject}>Dismiss</button>
+          <div>{error}</div>
+          <div style={{marginTop:8}}>
+            <button onClick={() => handleSelectSubject({ subject: { name: selectedSubject }, difficulty: selectedDifficulty })}>Retry API</button>
+            <button onClick={handleUseMock} style={{marginLeft:8}}>Use Mock Questions</button>
+            <button onClick={handleSelectNewSubject} style={{marginLeft:8}}>Dismiss</button>
+          </div>
         </div>
       )}
       
@@ -84,7 +95,13 @@ const App = () => {
       )}
 
       {appState === 'selection' && !loading && (
-        <SubjectSelection onSelectSubject={handleSelectSubject} />
+        <>
+          <SubjectSelection onSelectSubject={handleSelectSubject} />
+          <div style={{marginTop:12}}>
+            <button onClick={testApi}>Test API</button>
+            {apiTestResult && <div style={{marginTop:8}}>{apiTestResult}</div>}
+          </div>
+        </>
       )}
 
       {appState === 'quiz' && !loading && (
