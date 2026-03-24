@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_TIMEOUT_MS = Number(process.env.MONGODB_TIMEOUT_MS || 30000);
 
 // Middleware
 app.use(cors({
@@ -20,16 +21,22 @@ app.use(express.json());
 
 // Database Connection
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URI, {
+    serverSelectionTimeoutMS: MONGODB_TIMEOUT_MS,
+    connectTimeoutMS: MONGODB_TIMEOUT_MS,
+  })
   .then(async () => {
     console.log('✅ MongoDB connected successfully');
     
-    // Seed database on first run (if collections are empty)
-    const collectionCount = await mongoose.connection.db.listCollections().toArray();
-    if (collectionCount.length === 0) {
+    // Seed database if Quiz collection is empty
+    const Quiz = await import('./models/Quiz.js').then(m => m.default);
+    const quizCount = await Quiz.countDocuments();
+    if (quizCount === 0) {
       console.log('📝 Seeding database with quiz data...');
       await seedData();
       console.log('✅ Database seeded');
+    } else {
+      console.log(`📊 Database already has ${quizCount} quiz documents`);
     }
   })
   .catch((err) => {

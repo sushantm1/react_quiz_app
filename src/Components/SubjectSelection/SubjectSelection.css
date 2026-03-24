@@ -11,7 +11,7 @@
   background: white;
   border-radius: 17px;
   padding: 34px;
-  max-width: 850px;
+  max-width: 650px;
   width: 100%;
   box-shadow: 0 17px 51px rgba(0, 0, 0, 0.3);
 }
@@ -23,6 +23,13 @@
   margin-bottom: 8.5px;
 }
 
+.byline {
+  text-align: center;
+  color: #1f1e1e;
+  font-size: 1em;
+  /* margin: 0 0 10px; */
+}
+
 .subtitle {
   text-align: center;
   color: #666;
@@ -30,8 +37,43 @@
   margin-bottom: 25.5px;
 }
 
+.options-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #f8f8ff;
+  border: 1.5px solid #e0e4ff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.option-group label {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.82em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.options-divider {
+  width: 1.5px;
+  height: 50px;
+  background: #dde0f0;
+  flex-shrink: 0;
+}
+
 .difficulty-selector {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -45,19 +87,20 @@
 
 .difficulty-buttons {
   display: flex;
-  gap: 15px;
+  gap: 8px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .difficulty-btn {
-  padding: 10px 25px;
+  padding: 7px 16px;
   border: 2px solid #667eea;
   background: white;
   color: #667eea;
   border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 0.85em;
   transition: all 0.3s ease;
 }
 
@@ -73,16 +116,16 @@
 
 .subjects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(127.5px, 1fr));
-  gap: 17px;
-  margin-bottom: 34px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .subject-card {
   background: #f5f5f5;
   border: 1.7px solid transparent;
-  border-radius: 12.75px;
-  padding: 21.25px;
+  border-radius: 10px;
+  padding: 14px 10px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -101,14 +144,14 @@
 }
 
 .subject-icon {
-  font-size: 2.5em;
+  font-size: 1.8em;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .subject-card h3 {
   margin: 0;
-  font-size: 1.1em;
+  font-size: 0.82em;
   color: inherit;
 }
 
@@ -137,4 +180,16 @@
   background: #ccc;
   color: #666;
   cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .options-card {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .options-divider {
+    width: 80%;
+    height: 1.5px;
+  }
 }

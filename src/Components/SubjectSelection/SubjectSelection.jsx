@@ -15,10 +15,11 @@ const SubjectSelection = ({ onSelectSubject }) => {
 
   const [difficulty, setDifficulty] = useState('medium');
   const [selectedSubject, setSelectedSubject] = useState(null);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
 
   const handleStart = () => {
     if (selectedSubject) {
-      onSelectSubject({ subject: selectedSubject, difficulty });
+      onSelectSubject({ subject: selectedSubject, difficulty, numberOfQuestions });
     }
   };
 
@@ -26,20 +27,40 @@ const SubjectSelection = ({ onSelectSubject }) => {
     <div className="selection-container">
       <div className="selection-content">
         <h1>Quiz Master</h1>
+        <p className="byline">by Sushant</p>
         <p className="subtitle">Select a subject and difficulty level to begin</p>
 
-        <div className="difficulty-selector">
-          <label>Difficulty Level:</label>
-          <div className="difficulty-buttons">
-            {['easy', 'medium', 'hard'].map((level) => (
-              <button
-                key={level}
-                className={`difficulty-btn ${difficulty === level ? 'active' : ''}`}
-                onClick={() => setDifficulty(level)}
-              >
-                {level.charAt(0).toUpperCase() + level.slice(1)}
-              </button>
-            ))}
+        <div className="options-card">
+          <div className="option-group">
+            <label>Difficulty</label>
+            <div className="difficulty-buttons">
+              {['easy', 'medium', 'hard'].map((level) => (
+                <button
+                  key={level}
+                  className={`difficulty-btn ${difficulty === level ? 'active' : ''}`}
+                  onClick={() => setDifficulty(level)}
+                >
+                  {level.charAt(0).toUpperCase() + level.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="options-divider" />
+
+          <div className="option-group">
+            <label>Questions</label>
+            <div className="difficulty-buttons">
+              {[5, 10, 20].map((n) => (
+                <button
+                  key={n}
+                  className={`difficulty-btn ${numberOfQuestions === n ? 'active' : ''}`}
+                  onClick={() => setNumberOfQuestions(n)}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
