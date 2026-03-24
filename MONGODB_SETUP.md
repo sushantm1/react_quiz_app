@@ -122,7 +122,7 @@ GET http://localhost:5000/api/quiz/subjects
 my-react-app/
 ├── src/
 │   ├── services/
-│   │   └── aiService.js (Updated to call backend API)
+│   │   └── quizService.js (Calls backend API)
 │   ├── Components/
 │   └── ...
 ├── server/
@@ -132,6 +132,7 @@ my-react-app/
 │   │   └── quiz.js (API routes)
 │   ├── index.js (Express server)
 │   ├── seedData.js (Database seeding)
+│   ├── upload.js (Upload/upsert from questions.json)
 │   ├── .env (MongoDB connection)
 │   └── package.json
 └── .env.local (Frontend config with API URL)
