@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  // "homepage": "https://sushantm1.github.io/react_quiz_app",
   "scripts": {
     "dev": "vite",
     "dev:all": "concurrently \"npm run dev\" \"cd server && npm run dev\"",
