@@ -1,5 +1,5 @@
 // Quiz Service - Fetches data from MongoDB via backend API
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://3.110.164.48:5000/api';
+const API_BASE_URL = 'http://3.110.164.48:5000/api'|| import.meta.env.VITE_API_URL;
 
 export const fetchQuizQuestions = async (subject, difficulty, numberOfQuestions = 5) => {
   if (!subject || !difficulty) {
