@@ -5,17 +5,16 @@ import dotenv from 'dotenv';
 import quizRoutes from './routes/quiz.js';
 import seedData from './seedData.js';
 
-// dotenv.config();
+dotenv.config();
 
 const app = express();
-// const PORT = process.env.PORT || 5000;
-const PORT = 'http://3.110.164.48:5000';
+const PORT = Number(process.env.PORT || 5000);
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_TIMEOUT_MS = Number(process.env.MONGODB_TIMEOUT_MS || 30000);
 
 // Middleware
 app.use(cors({
-  origin: process.env.VITE_FRONTEND_URL ,
+  origin: process.env.VITE_FRONTEND_URL || process.env.FRONTEND_URL || true,
   credentials: true,
 }));
 app.use(express.json());
@@ -54,9 +53,8 @@ app.get('/api/health', (req, res) => {
 });
 
 // Start Server
-
-app.listen(5000, "0.0.0.0", () => {
-  console.log("Server running on port 5000");
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });
 // app.listen(PORT, () => {
 //   console.log(`🚀 Server running at http://localhost:${PORT}`);

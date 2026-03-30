@@ -1,7 +1,6 @@
 // Quiz Service - Fetches data from MongoDB via backend API
-// const API_BASE_URL = import.meta.env.VITE_API_URL;
-
-const API_BASE_URL='http://3.110.164.48:5000';
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://3.110.164.48:5000').replace(/\/$/, '');
+const QUIZ_API_BASE_URL = `${API_BASE_URL}/api/quiz`;
 
 export const fetchQuizQuestions = async (subject, difficulty, numberOfQuestions = 5) => {
   if (!subject || !difficulty) {
@@ -9,7 +8,7 @@ export const fetchQuizQuestions = async (subject, difficulty, numberOfQuestions 
   }
 
   try {
-    const url = `${API_BASE_URL}/quiz/questions/${encodeURIComponent(subject)}/${encodeURIComponent(difficulty)}?count=${numberOfQuestions}`;
+    const url = `${QUIZ_API_BASE_URL}/questions/${encodeURIComponent(subject)}/${encodeURIComponent(difficulty)}?count=${numberOfQuestions}`;
     console.log('Fetching from URL:', url);
 
     const response = await fetch(url, {
@@ -61,7 +60,7 @@ export const fetchQuizQuestions = async (subject, difficulty, numberOfQuestions 
 // Get available subjects
 export const getAvailableSubjects = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/quiz/subjects`);
+    const response = await fetch(`${QUIZ_API_BASE_URL}/subjects`);
     if (!response.ok) throw new Error('Failed to fetch subjects');
     const data = await response.json();
     return data.success ? data.subjects : getDefaultSubjects();
