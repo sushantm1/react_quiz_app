@@ -8,13 +8,14 @@ import seedData from './seedData.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
+const PORT = 'http://3.110.164.48:5000'
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_TIMEOUT_MS = Number(process.env.MONGODB_TIMEOUT_MS || 30000);
 
 // Middleware
 app.use(cors({
-  origin: process.env.VITE_FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.VITE_FRONTEND_URL ,
   credentials: true,
 }));
 app.use(express.json());
