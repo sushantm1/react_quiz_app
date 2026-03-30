@@ -54,8 +54,12 @@ app.get('/api/health', (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-  console.log(`📚 API: http://localhost:${PORT}/api/quiz/questions/[subject]/[difficulty]`);
-  console.log(`📊 Health: http://localhost:${PORT}/api/health`);
+
+app.listen(5000, "0.0.0.0", () => {
+  console.log("Server running on port 5000");
 });
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running at http://localhost:${PORT}`);
+//   console.log(`📚 API: http://localhost:${PORT}/api/quiz/questions/[subject]/[difficulty]`);
+//   console.log(`📊 Health: http://localhost:${PORT}/api/health`);
+// });
